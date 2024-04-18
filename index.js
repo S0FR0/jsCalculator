@@ -14,61 +14,110 @@ let divide = (a, b) => {
     return a / b;
 }
 
-let num1
+let percentage = (a, b) => {
+    return a % b;
+}
 
-let operation
-
-let num2
-
-let operate = (num1, operation, num2,) => {
+let operate = (num1,  num2, operation) => {
     return operation(num1, num2);
 }
+
+let firstNumber = null
+
+let secondNumber
+
+let operand
 
 const display = document.getElementById('display');
 
 const btns = document.querySelectorAll('button');
 
+
 btns.forEach((btn)=> {
     btn.addEventListener('click', () => {
-        
-        lastValue = 0
-        if (btn.id === 'C')
-        {value = 0;
-        display.innerText = ``;}
-        
-        else if (Number(btn.id) >= 0 && Number(btn.id) <= 9)
-        {   display.innerText += `${btn.id}`;
+
+        if(btn.id ==='C'){
+            firstNumber = null;
+            display.innerText =``;
         }
+
+        else if(Number(btn.id)  >= 0 && Number(btn.id) <= 9)
+            {if(display.innerText === 'x' || display.innerText === '+' || display.innerText === '-' || display.innerText === '/' || display.innerText === '%')
+                    display.innerText = ``;
+            if(display.innerText.length < 7)
+                display.innerText += `${btn.id}`;}
         
-        else if (btn.id === '='){
-            display.innerText = `${lastValue}`;
-            }
+        else if(btn.id === '.'){
+            if(display.innerText.includes('.') !== true)
+                display.innerText += '.'; 
+        }
+
+        else if(btn.id === 'change'){
+            display.innerText = `${Number(display.innerText) * - 1}`;
+        } 
+        
+        else if(btn.id==='='){
+            secondNumber = Number(display.innerText);
+            display.innerText = ``;
+            switch (operand) {
+                case 'add':
+                    firstNumber = operate(firstNumber, secondNumber, add)
+                    console.log(firstNumber)
+                    break;
+                case 'subtract':
+                    firstNumber = operate(firstNumber, secondNumber, subtract)
+                    console.log(firstNumber)
+                    break;
+                case 'multiply':
+                    firstNumber = operate(firstNumber, secondNumber, multiply)
+                    console.log(firstNumber)
+                    break;
+                case 'divide':
+                    firstNumber = operate(firstNumber, secondNumber, divide)
+                    console.log(firstNumber)
+                    break;
+                case 'percentage':
+                    firstNumber = operate(firstNumber, secondNumber, percentage)
+                    console.log(firstNumber)
+                    break;}
+            display.innerText = `${firstNumber}`;}
+        
 
         else
-        {value = Number(display.innerText);
-            if (oper === null)
-                oper = btn.id;}
+            {    
+            if(firstNumber === null)
+                {
+                    firstNumber = Number(display.innerText);
+                    operand = btn.id;
+                    display.innerText = `${btn.innerText}`;
+                }
+            
+            else
+                {secondNumber = Number(display.innerText);
+            
+                display.innerText = `${btn.innerText}`;
+            switch (operand) {
+                case 'add':
+                    firstNumber = operate(firstNumber, secondNumber, add)
+                    console.log(firstNumber)
+                    break;
+                case 'subtract':
+                    firstNumber = operate(firstNumber, secondNumber, subtract)
+                    console.log(firstNumber)
+                    break;
+                case 'multiply':
+                    firstNumber = operate(firstNumber, secondNumber, multiply)
+                    console.log(firstNumber)
+                    break;
+                case 'divide':
+                    firstNumber = operate(firstNumber, secondNumber, divide)
+                    console.log(firstNumber)
+                    break;
+                case 'percentage':
+                    firstNumber = operate(firstNumber, secondNumber, percentage)
+                    console.log(firstNumber)
+                    break;
+            }
+            operand = btn.id;}}
     })
 })
-
-
-
-// {if (oper === null){
-//     numOne = Number(display.innerText);
-//     oper = btn.id;
-//     }
-//     display.innerText += ``;
-//     display.innerText += `${btn.id}`;
-//     numTwo = Number(display.innerText);
-//     switch(oper) {
-//         case 'x':
-//             numOne = multiply(numOne, numTwo);
-//         case '/':
-//             numOne = divide(numOne, numTwo);
-//         case '+':
-//             numOne = add(numOne, numTwo);
-//         case '-':
-//             numOne = subtract(numOne, numTwo);
-//     oper = btn.id;
-// }
-// }
