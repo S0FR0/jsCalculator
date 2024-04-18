@@ -42,7 +42,7 @@ btns.forEach((btn)=> {
         }
 
         else if(Number(btn.id)  >= 0 && Number(btn.id) <= 9)
-            {if(display.innerText === 'x' || display.innerText === '+' || display.innerText === '-' || display.innerText === '/' || display.innerText === '%')
+            {if(display.innerText === '*' || display.innerText === '+' || display.innerText === '-' || display.innerText === '/' || display.innerText === '%')
                     display.innerText = ``;
             if(display.innerText.length < 7)
                 display.innerText += `${btn.id}`;}
@@ -79,8 +79,11 @@ btns.forEach((btn)=> {
                 case 'percentage':
                     firstNumber = operate(firstNumber, secondNumber, percentage)
                     console.log(firstNumber)
-                    break;}
-            display.innerText = `${firstNumber}`;}
+                    break;
+                }
+                operand = null;
+            display.innerText = `${firstNumber}`;
+        }
         
 
         else
@@ -118,6 +121,8 @@ btns.forEach((btn)=> {
                     console.log(firstNumber)
                     break;
             }
-            operand = btn.id;}}
+            operand = btn.id;
+        }
+    }
     })
 })
